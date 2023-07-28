@@ -3,9 +3,9 @@ import tkinter as tk
 from PIL import Image, ImageTk
 
 # Get the path/directory
-folder_dir = r"C:\Users\jgamb\Documents\Programming\Python\olivers-picture-book\pictures"
+folder_dir = "pictures"
 image_list = [image_filename for image_filename in os.listdir(folder_dir) if image_filename.endswith(".jpeg")]
-raw_picture_dir = r"C:\Users\jgamb\Documents\Programming\Python\olivers-picture-book\raw_pictures"
+raw_picture_dir = "raw_pictures"
 
 def resize_images(source_folder, destination_folder, new_size):
     # Create the destination folder if it doesn't exist
@@ -16,7 +16,10 @@ def resize_images(source_folder, destination_folder, new_size):
     for filename in os.listdir(source_folder):
         file_path = os.path.join(source_folder, filename)
 
-        # Check if the file is an image (you can add more image extensions if needed)
+        if os.path.isfile(file_path) and filename.lower().endswith(".avif"):
+            os.remove(file_path)
+            print(".avif file is unsupported. sorry")
+
         if os.path.isfile(file_path) and filename.lower().endswith((".png", ".jpg", ".jpeg", ".gif", ".bmp", ".webp")):
             try:
                 # Open the image using Pillow
@@ -27,20 +30,20 @@ def resize_images(source_folder, destination_folder, new_size):
 
                 # Save the resized image to the destination folder
                 new_file_path = os.path.join(destination_folder, filename)
-                
-                # If the file is in webp format, convert it to png before saving
-                if filename.lower().endswith(".webp") or filename.lower().endswith("png"):
-                    new_file_path = os.path.splitext(new_file_path)[0] + ".jpeg"
-                    img = img.convert("RGB")  # Convert to RGB mode before saving as PNG
+
+                if filename.lower().endswith((".webp", ".png", ".jpg", ".jpeg", ".gif", ".bmp")):
+                    # Convert to JPEG before saving if it's in webp, avif, or other supported formats
+                    converted_file_path = os.path.splitext(new_file_path)[0] + ".jpeg"
+                    img = img.convert("RGB")  # Convert to RGB mode before saving as JPEG
                 else:
-                    new_file_path = os.path.splitext(new_file_path)[0] + ".jpeg"
-                
-                img.save(new_file_path)
+                    converted_file_path = new_file_path
+
+                img.save(converted_file_path)
 
                 # Delete raw picture after resizing
                 os.remove(file_path)
 
-                print(f"Resized, saved and removed {file_path}: {new_file_path}")
+                print(f"Resized, saved and removed {file_path}: {converted_file_path}")
             except Exception as e:
                 print(f"Error processing {filename}: {str(e)}")
 
