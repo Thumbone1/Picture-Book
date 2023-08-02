@@ -2,7 +2,8 @@
 
 This program is a simple photo viewer that I use to help my kiddo learn new words.
 
------------------------INSTRUCTIONS----------------------------------------
+
+-----------------------------INSTRUCTIONS----------------------------------------
 
 
 
