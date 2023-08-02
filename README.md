@@ -3,7 +3,7 @@
 This program is a simple photo viewer that I use to help my kiddo learn new words.
 
 
-# <font size="9">INSTRUCTIONS</font>
+# <font size="5">INSTRUCTIONS</font>
 
 
 
