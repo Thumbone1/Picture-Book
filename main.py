@@ -20,7 +20,6 @@ image_list = [
     if image_filename.endswith(".jpeg")
 ]
 
-
 def resize_images(source_folder, destination_folder, new_size):
     # Loop through all files in the source folder
     for filename in os.listdir(source_folder):
@@ -111,8 +110,8 @@ def show_last_image(event):
 window = tk.Tk()
 window.title("Image Viewer")
 window.geometry("1920x1080")
-window.configure(background="#A6A6A6")
-print("initializing window")
+window.configure(background="#61677A")
+print("initializing window!")
 
 # Try to Load the first image. Display warning if list is empty
 current_image_index = 0
@@ -123,13 +122,14 @@ try:
 except IndexError:
     messagebox.showinfo(
         title="No Images Found",
-        message=f"Please add some images to {os.getcwd()}\\{downloaded_pic_dir}\
+        message=f"Please add some images to {os.path.join(os.getcwd(), downloaded_pic_dir)}\
                 \n\nYou can download from google images or add your own :)",
     )
     exit(0)
 else:
     current_image = Image.open(current_image_path)
     tk_image = ImageTk.PhotoImage(current_image)
+    print("setting up pictures!")
 
 # Create a label to display the image
 image_label = tk.Label(window, image=tk_image)
