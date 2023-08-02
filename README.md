@@ -6,4 +6,5 @@ He really loves going through new pictures and telling us what they are.
 
 
 
-Simply Download and follow the directions
+Simply Download, run 'main' in the dist folder, and follow the instructions.
+
